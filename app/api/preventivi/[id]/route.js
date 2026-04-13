@@ -1,15 +1,9 @@
 import { createServerSupabase } from '@/lib/supabase'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 
 const STATI_VALIDI = ['da_richiamare', 'in_lavorazione', 'completato']
 
-// PATCH /api/preventivi/:id — aggiorna stato (solo admin)
+// PATCH /api/preventivi/:id — aggiorna stato admin
 export async function PATCH(request, context) {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return Response.json({ error: 'Non autorizzato' }, { status: 401 })
-  }
 
   try {
     const { id } = await context.params

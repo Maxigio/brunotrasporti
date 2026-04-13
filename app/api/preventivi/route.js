@@ -1,6 +1,4 @@
 import { createServerSupabase } from '@/lib/supabase'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import fs from 'fs'
 import path from 'path'
 
@@ -77,12 +75,8 @@ export async function POST(request) {
   }
 }
 
-// GET /api/preventivi — lista (solo admin)
+// GET /api/preventivi — lista admin
 export async function GET() {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return Response.json({ error: 'Non autorizzato' }, { status: 401 })
-  }
 
   try {
     // Leggi da Supabase

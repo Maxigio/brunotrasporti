@@ -1,13 +1,7 @@
 import { createServerSupabase } from '@/lib/supabase'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 
-// GET /api/stats — statistiche aggregate (solo admin)
+// GET /api/stats — statistiche aggregate admin
 export async function GET() {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return Response.json({ error: 'Non autorizzato' }, { status: 401 })
-  }
 
   try {
     const db = createServerSupabase()
