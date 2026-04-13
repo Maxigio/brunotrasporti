@@ -1,0 +1,79 @@
+[
+  {
+    "id": "764534af-873d-4d0e-bb55-c5c4fa33cb27",
+    "servizio": "Pulizia del Verde",
+    "descrizione": "[Pulizia del Verde] dimensione: 200–500 mq",
+    "contatto_nome": "123",
+    "contatto_telefono": "123213",
+    "contatto_email": null,
+    "status": "da_richiamare",
+    "created_at": "2026-04-12T15:43:11.560Z",
+    "source": "local"
+  },
+  {
+    "id": "e82c010e-4ae2-466c-8cf9-bf3d81d08f50",
+    "servizio": "Pulizia del Verde, Traslochi, Idraulico",
+    "descrizione": "[Pulizia del Verde] tipo_spazio: Giardino privato | dimensione: Meno di 50 mq | frequenza: Mensile\n[Traslochi] dimensione_apt: 4+ locali / Ufficio | piano_partenza: 4°–6° | ascensore: No\n[Idraulico] ",
+    "contatto_nome": "1212121",
+    "contatto_telefono": "1111111111111",
+    "contatto_email": null,
+    "status": "da_richiamare",
+    "created_at": "2026-04-12T13:37:34.482Z",
+    "source": "local"
+  },
+  {
+    "id": "2fb27344-53f2-418c-b1b4-58d26451777e",
+    "servizio": "Pulizia Locali, Smaltimenti, Elettricista",
+    "descrizione": "[Pulizia Locali] tipo_locale: Negozio / Showroom | dimensione: 50–150 mq | frequenza: Settimanale\n[Smaltimenti] \n[Elettricista] contesto: Condominio | tipo_intervento: Messa a norma impianto",
+    "contatto_nome": "12",
+    "contatto_telefono": "12121221212",
+    "contatto_email": null,
+    "status": "da_richiamare",
+    "created_at": "2026-04-12T13:26:33.383Z",
+    "source": "local"
+  },
+  {
+    "id": "feb39feb-53a4-4cd9-a057-46825a4d3bef",
+    "servizio": "Pulizia Locali, Elettricista",
+    "descrizione": "[Pulizia Locali] dimensione: 150–500 mq | frequenza: Bi-settimanale\n[Elettricista] ",
+    "contatto_nome": "aaaa",
+    "contatto_telefono": "1111111111",
+    "contatto_email": null,
+    "status": "da_richiamare",
+    "created_at": "2026-04-12T12:51:04.286Z",
+    "source": "local"
+  },
+  {
+    "id": "4a4f7c92-c1c6-48d5-9d48-7fb84f5f6117",
+    "servizio": "Sgombero Cantine, Elettricista, Smaltimenti, Pulizia Locali, Pulizia Scale",
+    "descrizione": "[Sgombero Cantine] dimensione: Piccola (< 10 mq)\n[Elettricista] \n[Smaltimenti] tipo_materiale: Mobili / Arredi\n[Pulizia Locali] \n[Pulizia Scale] \nNote: 1234",
+    "contatto_nome": "prova",
+    "contatto_telefono": "1234",
+    "contatto_email": "1234",
+    "status": "da_richiamare",
+    "created_at": "2026-04-10T20:50:24.602Z",
+    "source": "local"
+  },
+  {
+    "id": "fa8c7e5a-efbc-46b1-bb69-06588888b4a5",
+    "servizio": "Pulizia Scale, Sgombero Cantine, Smaltimenti",
+    "descrizione": "[Pulizia Scale] piani: 4–6 piani | frequenza: Bi-settimanale\n[Sgombero Cantine] dimensione: Piccola (< 10 mq) | contenuto: Elettrodomestici\n[Smaltimenti] tipo_materiale: Materiali edili\nNote: ciaone",
+    "contatto_nome": "Arianna Ghezz",
+    "contatto_telefono": "+39 3921036344",
+    "contatto_email": "mynamesjack89@gmail.com",
+    "status": "da_richiamare",
+    "created_at": "2026-04-09T20:53:57.779Z",
+    "source": "local"
+  },
+  {
+    "id": "e35a15b6-fb78-4924-b224-a0f687fee4ad",
+    "servizio": "Pulizia del Verde, Traslochi, Idraulico",
+    "descrizione": "[Pulizia del Verde] tipo_spazio: Spazio aziendale | frequenza: Bi-settimanale | dimensione: 200–500 mq\n[Traslochi] dimensione_apt: 3 locali | ascensore: Sì\n[Idraulico] tipo_intervento: Installazione sanitari | urgenza: Presto (entro 2–3 giorni)\nNote: ciao",
+    "contatto_nome": "Lucas Raineri",
+    "contatto_telefono": "+39 3921036344",
+    "contatto_email": "work@lucasraineri.it",
+    "status": "da_richiamare",
+    "created_at": "2026-04-09T15:51:03.325Z",
+    "source": "local"
+  }
+]

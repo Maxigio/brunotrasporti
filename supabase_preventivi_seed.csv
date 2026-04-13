@@ -1,0 +1,13 @@
+id,servizio,descrizione,status,created_at
+550e8400-e29b-41d4-a716-446655440001,Pulizia Scale,Scale condominiali di 4 piani da pulire ogni settimana,completato,2026-01-15 09:30:00+00
+550e8400-e29b-41d4-a716-446655440002,Pulizia del Verde,Giardino condominiale di circa 300 mq,completato,2026-01-22 14:15:00+00
+550e8400-e29b-41d4-a716-446655440003,Traslochi,Trasloco appartamento 80 mq dal terzo piano senza ascensore,completato,2026-02-05 10:00:00+00
+550e8400-e29b-41d4-a716-446655440004,Pulizia Locali,Negozio di 120 mq in centro Torino - pulizia settimanale,in_lavorazione,2026-02-18 16:45:00+00
+550e8400-e29b-41d4-a716-446655440005,Sgombero Cantine,Cantina di circa 20 mq piena di mobili vecchi,in_lavorazione,2026-03-01 11:20:00+00
+550e8400-e29b-41d4-a716-446655440006,Elettricista,Messa a norma impianto elettrico appartamento 60 mq,in_lavorazione,2026-03-10 08:50:00+00
+550e8400-e29b-41d4-a716-446655440007,Pulizia del Verde,Pulizia area verde aziendale circa 500 mq,da_richiamare,2026-03-20 13:00:00+00
+550e8400-e29b-41d4-a716-446655440008,Idraulico,Perdita sotto al lavandino in cucina,da_richiamare,2026-03-25 17:30:00+00
+550e8400-e29b-41d4-a716-446655440009,Smaltimenti,Smaltimento vecchi elettrodomestici e mobili,da_richiamare,2026-04-01 09:10:00+00
+550e8400-e29b-41d4-a716-446655440010,Noleggio Scala,Noleggio scala per tinteggiatura facciata condominio,da_richiamare,2026-04-05 14:00:00+00
+550e8400-e29b-41d4-a716-446655440011,Pulizia Scale,Pulizia straordinaria scale dopo lavori di ristrutturazione,da_richiamare,2026-04-07 10:30:00+00
+550e8400-e29b-41d4-a716-446655440012,Decoratore,,da_richiamare,2026-04-08 16:00:00+00
