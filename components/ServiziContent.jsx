@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import Link from 'next/link'
 import { serviziPrincipali, serviziCollaborazione, tuttiServizi } from '@/data/servizi'
 import ServiceCardExpand from '@/components/ServiceCardExpand'
@@ -47,14 +47,6 @@ const recensioni = [
     service: 'Pulizia verde',
     avatar: 'MR',
     text: 'Bruno segue il mio giardino da oltre un anno e non ho mai avuto il minimo problema. Puntuali, professionali e prezzi più che onesti. Lo consiglio a chiunque.',
-    stars: 5,
-  },
-  {
-    name: 'Silvia M.',
-    location: 'Moncalieri',
-    service: 'Idraulico',
-    avatar: 'SM',
-    text: 'Ho avuto un guasto urgente al mattino e sono arrivati in meno di due ore. Lavoro preciso e pulito, ambiente lasciato in ordine. Ottimo servizio!',
     stars: 5,
   },
   {
@@ -213,6 +205,7 @@ export default function ServiziContent() {
               />
             ))}
           </div>
+          <MediaSlider />
         </div>
       </section>
 
@@ -467,5 +460,183 @@ function SpinnerIcon() {
       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
     </svg>
+  )
+}
+
+/* ─── media slider ────────────────────────────────────────────── */
+const sliderSlides = [
+  {
+    type: 'video',
+    src: '/videos/video-sgomberi-traslochi.mp4',
+    label: 'Sgomberi e Traslochi',
+    caption: 'Svuotiamo e traslociamo ogni tipo di spazio, dalle cantine agli appartamenti.',
+  },
+  {
+    type: 'image',
+    src: '/images/gallery/furgone-2.jpg',
+    label: 'I nostri mezzi',
+    caption: 'Flotta di furgoni attrezzati per ogni tipo di intervento sul territorio.',
+  },
+  {
+    type: 'image',
+    src: '/images/gallery/furgone-8.jpg',
+    label: 'Trasporto professionale',
+    caption: 'Carico, trasporto e scarico gestiti con cura e precisione.',
+  },
+  {
+    type: 'image',
+    src: '/images/gallery/misc-5.jpg',
+    label: 'Interventi sul territorio',
+    caption: 'Operiamo a Torino e provincia con rapidità e affidabilità.',
+  },
+]
+
+function MediaSlider() {
+  const [current, setCurrent] = useState(0)
+  const [transitioning, setTransitioning] = useState(false)
+  const touchStartX = useRef(null)
+
+  const goTo = useCallback(
+    (index) => {
+      if (transitioning) return
+      setTransitioning(true)
+      setCurrent(index)
+      setTimeout(() => setTransitioning(false), 350)
+    },
+    [transitioning]
+  )
+
+  const prev = useCallback(() => goTo((current - 1 + sliderSlides.length) % sliderSlides.length), [current, goTo])
+  const next = useCallback(() => goTo((current + 1) % sliderSlides.length), [current, goTo])
+
+  // keyboard navigation
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [prev, next])
+
+  const slide = sliderSlides[current]
+
+  return (
+    <div className="mt-12">
+      <div className="text-center mb-6">
+        <span className="text-gray-500 font-semibold text-sm uppercase tracking-wide">Il nostro lavoro</span>
+        <h3 className="text-xl font-bold text-brand-900 mt-1">Vedi i nostri interventi</h3>
+      </div>
+
+      <div
+        className="relative rounded-2xl overflow-hidden shadow-lg bg-brand-900 select-none"
+        onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
+        onTouchEnd={(e) => {
+          if (touchStartX.current === null) return
+          const diff = touchStartX.current - e.changedTouches[0].clientX
+          if (Math.abs(diff) > 40) diff > 0 ? next() : prev()
+          touchStartX.current = null
+        }}
+      >
+        {/* Media */}
+        <div
+          className="w-full aspect-video transition-opacity duration-300"
+          style={{ opacity: transitioning ? 0 : 1 }}
+        >
+          {slide.type === 'video' ? (
+            <video
+              key={slide.src}
+              src={slide.src}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={slide.src}
+              src={slide.src}
+              alt={slide.label}
+              className="w-full h-full object-cover"
+            />
+          )}
+        </div>
+
+        {/* Caption overlay */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4 pointer-events-none">
+          <p className="text-white font-semibold text-sm sm:text-base leading-snug">{slide.label}</p>
+          <p className="text-gray-300 text-xs sm:text-sm mt-0.5 hidden sm:block">{slide.caption}</p>
+        </div>
+
+        {/* Prev button */}
+        <button
+          onClick={prev}
+          aria-label="Slide precedente"
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white flex items-center justify-center transition"
+        >
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        {/* Next button */}
+        <button
+          onClick={next}
+          aria-label="Slide successiva"
+          className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white flex items-center justify-center transition"
+        >
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {/* Slide counter */}
+        <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full">
+          {current + 1} / {sliderSlides.length}
+        </div>
+      </div>
+
+      {/* Dot navigation */}
+      <div className="flex justify-center gap-2 mt-4">
+        {sliderSlides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Vai alla slide ${i + 1}`}
+            className={`rounded-full transition-all duration-300 ${
+              i === current
+                ? 'bg-brand-700 w-6 h-2.5'
+                : 'bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5'
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Thumbnail strip */}
+      <div className="flex gap-2 mt-4 justify-center">
+        {sliderSlides.map((s, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className={`relative w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden shrink-0 border-2 transition-all duration-200 ${
+              i === current ? 'border-brand-500 scale-105 shadow-md' : 'border-transparent opacity-60 hover:opacity-90'
+            }`}
+          >
+            {s.type === 'video' ? (
+              <div className="w-full h-full bg-brand-900 flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={s.src} alt={s.label} className="w-full h-full object-cover" />
+            )}
+          </button>
+        ))}
+      </div>
+    </div>
   )
 }

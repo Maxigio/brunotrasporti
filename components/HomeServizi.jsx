@@ -2,7 +2,11 @@
 
 import { useState, useRef } from 'react'
 import Link from 'next/link'
-import { serviziPrincipali } from '@/data/servizi'
+import { tuttiServizi } from '@/data/servizi'
+
+const homeServizi = tuttiServizi.filter((s) =>
+  ['pulizia-verde', 'pulizia-locali', 'sgomberi'].includes(s.id)
+)
 import ServiceCardExpand from '@/components/ServiceCardExpand'
 import PreventivoWizard from '@/components/PreventivoWizard'
 
@@ -38,7 +42,7 @@ export default function HomeServizi() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8 items-start">
-            {serviziPrincipali.map((s) => (
+            {homeServizi.map((s) => (
               <ServiceCardExpand
                 key={s.id}
                 servizio={s}

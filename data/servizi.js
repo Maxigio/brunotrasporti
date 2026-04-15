@@ -42,6 +42,12 @@ export const serviziCollaborazione = [
     icona: 'trash',
   },
   {
+    id: 'sgomberi',
+    nome: 'Sgomberi',
+    descrizione: 'Sgombero di appartamenti, uffici, cantine, soffitte e locali di qualsiasi dimensione.',
+    icona: 'box',
+  },
+  {
     id: 'sgombero-cantine',
     nome: 'Sgombero Cantine',
     descrizione: 'Sgombero completo di cantine, soffitte, box e locali di deposito.',
@@ -53,12 +59,7 @@ export const serviziCollaborazione = [
     descrizione: 'Tinteggiatura, verniciatura e decorazione di interni ed esterni.',
     icona: 'paint',
   },
-  {
-    id: 'idraulico',
-    nome: 'Idraulico',
-    descrizione: 'Interventi idraulici, riparazioni guasti, installazione sanitari e impianti.',
-    icona: 'water',
-  },
+
   {
     id: 'elettricista',
     nome: 'Elettricista',

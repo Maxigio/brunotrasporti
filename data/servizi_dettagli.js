@@ -155,6 +155,29 @@ export const serviziDettagli = {
       },
     ],
   },
+  'sgomberi': {
+    incluso: [
+      'Svuotamento completo dello spazio',
+      'Selezione materiale recuperabile o da donare',
+      'Smaltimento rifiuti ingombranti',
+      'Trasporto a discarica autorizzata',
+      'Pulizia finale dello spazio',
+    ],
+    domande: [
+      {
+        id: 'tipo_spazio',
+        label: 'Tipo di spazio da sgomberare',
+        tipo: 'scelta',
+        opzioni: ['Appartamento', 'Cantina / Soffitta', 'Ufficio / Negozio', 'Box / Garage'],
+      },
+      {
+        id: 'dimensione',
+        label: 'Dimensione approssimativa',
+        tipo: 'scelta',
+        opzioni: ['Piccola (< 30 mq)', 'Media (30–80 mq)', 'Grande (> 80 mq)'],
+      },
+    ],
+  },
   'sgombero-cantine': {
     incluso: [
       'Svuotamento completo',
@@ -197,29 +220,6 @@ export const serviziDettagli = {
         label: 'Superfici da trattare',
         tipo: 'scelta',
         opzioni: ['1 stanza', '2–3 stanze', 'Intero appartamento', 'Facciata esterna'],
-      },
-    ],
-  },
-  'idraulico': {
-    incluso: [
-      'Riparazione perdite e guasti',
-      'Sostituzione rubinetteria',
-      'Installazione sanitari',
-      'Manutenzione caldaie',
-      'Pronto intervento',
-    ],
-    domande: [
-      {
-        id: 'tipo_intervento',
-        label: 'Tipo di intervento',
-        tipo: 'scelta',
-        opzioni: ['Perdita / Guasto urgente', 'Sostituzione rubinetteria', 'Installazione sanitari', 'Manutenzione'],
-      },
-      {
-        id: 'urgenza',
-        label: 'Urgenza',
-        tipo: 'scelta',
-        opzioni: ['Urgente (entro oggi)', 'Presto (entro 2–3 giorni)', 'Programmato'],
       },
     ],
   },

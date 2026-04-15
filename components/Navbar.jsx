@@ -23,7 +23,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 group">
             <Leaf className="w-6 h-6 text-brand-500" strokeWidth={2} />
             <span className="text-white font-bold text-lg leading-tight">
-              Bruno Trasporti <span className="text-white opacity-80">Torino</span>
+              Bruno Trasporti
             </span>
           </Link>
 

@@ -17,6 +17,7 @@ const galleryItems = [
   { type: 'photo', src: '/images/gallery/verde-1.jpg' },
   { type: 'photo', src: '/images/gallery/furgone-5.jpg' },
   { type: 'photo', src: '/images/gallery/misc-7.jpg' },
+  { type: 'video', src: '/videos/video-sgomberi-traslochi.mp4' },
 ]
 
 const socialLinks = [
@@ -57,10 +58,10 @@ export default function HomePage() {
             Torino e provincia
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-balance mb-4">
-            Bruno Trasporti <span className="text-white opacity-80">Torino</span>
+            Bruno Trasporti
           </h1>
           <p className="text-xl sm:text-2xl text-gray-200 font-light mb-8 text-balance">
-            Pulizia, cura e affidabilità — dal verde ai locali, fino alle scale di casa tua.
+            Pulizia, cura e affidabilità a Torino e provincia — dal verde ai locali, fino alle scale di casa tua.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
             <Link
