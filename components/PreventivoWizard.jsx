@@ -1,22 +1,18 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ChevronRight, ChevronLeft, Check, Send } from 'lucide-react'
+import { ChevronRight, ChevronLeft, Check } from 'lucide-react'
 import { tuttiServizi } from '@/data/servizi'
 import { serviziDettagli } from '@/data/servizi_dettagli'
 
 const WHATSAPP_NUMBER = '38991894120'
-
-const STEP_LABELS = ['Servizi', 'Dettagli', 'Contatti']
+const STEP_LABELS = ['Servizi', 'Dettagli']
 
 export default function PreventivoWizard({ preselected = [] }) {
   const [step, setStep] = useState(0)
   const [selected, setSelected] = useState(preselected)
   const [risposte, setRisposte] = useState({})   // { serviceId: { domandaId: valore } }
-  const [contatti, setContatti] = useState({ nome: '', telefono: '', email: '', note: '' })
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState('')
+  const [note, setNote] = useState('')
 
   // Aggiorna selezione e torna allo step 0 se arriva una nuova preselection dal modal
   useEffect(() => {
@@ -24,8 +20,7 @@ export default function PreventivoWizard({ preselected = [] }) {
       setSelected(preselected)
       setStep(0)
       setRisposte({})
-      setSuccess(false)
-      setError('')
+      setNote('')
     }
   }, [preselected])
 
@@ -52,113 +47,41 @@ export default function PreventivoWizard({ preselected = [] }) {
     })
   }
 
-  function canProceed() {
-    if (step === 0) return selected.length > 0
-    if (step === 2) return contatti.nome.trim() !== '' && contatti.telefono.trim() !== ''
-    return true
-  }
-
-  async function handleSubmit() {
-    setLoading(true)
-    setError('')
-
-    const serviziNomi = selected
-      .map((id) => tuttiServizi.find((s) => s.id === id)?.nome)
-      .filter(Boolean)
-      .join(', ')
-
-    // Costruisci descrizione dalle risposte wizard
-    const dettagliTesto = selected
-      .map((id) => {
-        const servizio = tuttiServizi.find((s) => s.id === id)
-        const risp = risposte[id] || {}
-        const dettagli_str = Object.entries(risp)
-          .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`)
-          .join(' | ')
-        return `[${servizio?.nome}] ${dettagli_str}`
-      })
-      .join('\n')
-
-    const descrizioneCompleta = [
-      dettagliTesto,
-      contatti.note ? `Note: ${contatti.note}` : '',
-    ].filter(Boolean).join('\n')
-
-    try {
-      const res = await fetch('/api/preventivi', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          servizio: serviziNomi,
-          descrizione: descrizioneCompleta,
-          contatto_nome: contatti.nome,
-          contatto_telefono: contatti.telefono,
-          contatto_email: contatti.email,
-        }),
-      })
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
-        throw new Error(data.error || `Errore ${res.status}`)
-      }
-
-      setSuccess(true)
-    } catch (err) {
-      setError(`Errore nell'invio: ${err.message}`)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   function buildWhatsAppUrl() {
     const serviziNomi = selected
       .map((id) => tuttiServizi.find((s) => s.id === id)?.nome)
       .filter(Boolean)
-      .join(', ')
-    const text = `Salve Bruno, mi chiamo ${contatti.nome} e ho bisogno di un preventivo per: *${serviziNomi}*.\n\nTelefono: ${contatti.telefono}${contatti.email ? `\nEmail: ${contatti.email}` : ''}${contatti.note ? `\nNote: ${contatti.note}` : ''}\n\nZona: Torino e provincia.`
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`
+
+    let msg = `Ciao Bruno, vorrei richiedere un preventivo gratuito.\n\n`
+    msg += `Servizi: ${serviziNomi.join(', ')}\n`
+
+    // Dettagli per ogni servizio con risposte
+    const conRisposte = selected.filter((id) => Object.keys(risposte[id] || {}).length > 0)
+    if (conRisposte.length > 0) {
+      conRisposte.forEach((id) => {
+        const servizio = tuttiServizi.find((s) => s.id === id)
+        const risp = risposte[id] || {}
+        const domande = serviziDettagli[id]?.domande || []
+        msg += `\n${servizio?.nome}:\n`
+        Object.entries(risp).forEach(([domandaId, valore]) => {
+          const domanda = domande.find((d) => d.id === domandaId)
+          const label = domanda?.label || domandaId
+          const val = Array.isArray(valore) ? valore.join(', ') : valore
+          if (val) msg += `- ${label}: ${val}\n`
+        })
+      })
+    }
+
+    if (note.trim()) {
+      msg += `\nNote: ${note.trim()}\n`
+    }
+
+    msg += `\nZona: Torino e provincia`
+
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`
   }
 
-  function reset() {
-    setStep(0)
-    setSelected([])
-    setRisposte({})
-    setContatti({ nome: '', telefono: '', email: '', note: '' })
-    setSuccess(false)
-    setError('')
-  }
-
-  // SUCCESS
-  if (success) {
-    return (
-      <div className="text-center py-8 max-w-md mx-auto">
-        <div className="w-16 h-16 bg-brand-500 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Check className="w-8 h-8 text-white" strokeWidth={3} />
-        </div>
-        <h3 className="text-xl font-bold text-brand-900 mb-2">Richiesta inviata, {contatti.nome}!</h3>
-        <p className="text-gray-500 mb-6">
-          Bruno ti contatterà al numero <strong>{contatti.telefono}</strong> al più presto.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a
-            href={buildWhatsAppUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 bg-[#25D366] text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:opacity-90 transition"
-          >
-            <WhatsAppSvg />
-            Scrivici anche su WhatsApp
-          </a>
-          <button
-            onClick={reset}
-            className="px-5 py-2.5 rounded-xl border-2 border-brand-700 text-brand-700 text-sm font-semibold hover:bg-brand-700 hover:text-white transition"
-          >
-            Nuova richiesta
-          </button>
-        </div>
-      </div>
-    )
-  }
+  const hasAnyQuestions = selected.some((id) => serviziDettagli[id]?.domande?.length > 0)
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -226,126 +149,86 @@ export default function PreventivoWizard({ preselected = [] }) {
         </div>
       )}
 
-      {/* STEP 1: Domande custom per ogni servizio selezionato */}
+      {/* STEP 1: Domande custom + Note */}
       {step === 1 && (
-        <div className="space-y-8">
-          {selected.map((serviceId) => {
-            const servizio = tuttiServizi.find((s) => s.id === serviceId)
-            const dettagli = serviziDettagli[serviceId]
-            if (!dettagli?.domande) return null
-            return (
-              <div key={serviceId} className="bg-gray-50 rounded-2xl p-5">
-                <h3 className="font-bold text-brand-900 mb-4 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-brand-500 rounded-full inline-block"></span>
-                  {servizio?.nome}
-                </h3>
-                <div className="space-y-5">
-                  {dettagli.domande.map((domanda) => {
-                    const valoreCorrente = risposte[serviceId]?.[domanda.id]
-                    return (
-                      <div key={domanda.id}>
-                        <p className="text-sm font-semibold text-gray-700 mb-2">{domanda.label}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {domanda.opzioni.map((opzione) => {
-                            const isMultipla = domanda.tipo === 'scelta_multipla'
-                            const isSelected = isMultipla
-                              ? (valoreCorrente || []).includes(opzione)
-                              : valoreCorrente === opzione
-                            return (
-                              <button
-                                key={opzione}
-                                type="button"
-                                onClick={() =>
-                                  isMultipla
-                                    ? toggleRispostaMultipla(serviceId, domanda.id, opzione)
-                                    : setRisposta(serviceId, domanda.id, opzione)
-                                }
-                                className={`px-3 py-1.5 rounded-lg text-sm border-2 transition-all ${
-                                  isSelected
-                                    ? 'bg-brand-700 text-white border-brand-700'
-                                    : 'bg-white text-gray-600 border-gray-200 hover:border-brand-500'
-                                }`}
-                              >
-                                {opzione}
-                              </button>
-                            )
-                          })}
-                        </div>
-                        {domanda.tipo === 'scelta_multipla' && (
-                          <p className="text-xs text-gray-400 mt-1">Puoi selezionare più opzioni</p>
-                        )}
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            )
-          })}
-          {selected.every((id) => !serviziDettagli[id]?.domande) && (
-            <p className="text-gray-500 text-sm text-center py-4">
-              Nessuna domanda specifica per i servizi selezionati. Puoi procedere.
-            </p>
+        <div className="space-y-6">
+          {hasAnyQuestions && (
+            <div className="space-y-8">
+              {selected.map((serviceId) => {
+                const servizio = tuttiServizi.find((s) => s.id === serviceId)
+                const dettagli = serviziDettagli[serviceId]
+                if (!dettagli?.domande) return null
+                return (
+                  <div key={serviceId} className="bg-gray-50 rounded-2xl p-5">
+                    <h3 className="font-bold text-brand-900 mb-4 flex items-center gap-2">
+                      <span className="w-2 h-2 bg-brand-500 rounded-full inline-block"></span>
+                      {servizio?.nome}
+                    </h3>
+                    <div className="space-y-5">
+                      {dettagli.domande.map((domanda) => {
+                        const valoreCorrente = risposte[serviceId]?.[domanda.id]
+                        return (
+                          <div key={domanda.id}>
+                            <p className="text-sm font-semibold text-gray-700 mb-2">{domanda.label}</p>
+                            <div className="flex flex-wrap gap-2">
+                              {domanda.opzioni.map((opzione) => {
+                                const isMultipla = domanda.tipo === 'scelta_multipla'
+                                const isSelected = isMultipla
+                                  ? (valoreCorrente || []).includes(opzione)
+                                  : valoreCorrente === opzione
+                                return (
+                                  <button
+                                    key={opzione}
+                                    type="button"
+                                    onClick={() =>
+                                      isMultipla
+                                        ? toggleRispostaMultipla(serviceId, domanda.id, opzione)
+                                        : setRisposta(serviceId, domanda.id, opzione)
+                                    }
+                                    className={`px-3 py-1.5 rounded-lg text-sm border-2 transition-all ${
+                                      isSelected
+                                        ? 'bg-brand-700 text-white border-brand-700'
+                                        : 'bg-white text-gray-600 border-gray-200 hover:border-brand-500'
+                                    }`}
+                                  >
+                                    {opzione}
+                                  </button>
+                                )
+                              })}
+                            </div>
+                            {domanda.tipo === 'scelta_multipla' && (
+                              <p className="text-xs text-gray-400 mt-1">Puoi selezionare più opzioni</p>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           )}
-        </div>
-      )}
 
-      {/* STEP 2: Dati di contatto */}
-      {step === 2 && (
-        <div className="space-y-4">
-          <p className="text-sm font-semibold text-brand-700 uppercase tracking-wide mb-4">
-            I tuoi dati di contatto
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Nome e Cognome <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                value={contatti.nome}
-                onChange={(e) => setContatti((p) => ({ ...p, nome: e.target.value }))}
-                placeholder="Mario Rossi"
-                className="w-full rounded-xl border-2 border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-brand-500 transition"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Telefono <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="tel"
-                value={contatti.telefono}
-                onChange={(e) => setContatti((p) => ({ ...p, telefono: e.target.value }))}
-                placeholder="+39 333 123 4567"
-                className="w-full rounded-xl border-2 border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-brand-500 transition"
-              />
-            </div>
-          </div>
+          {/* Note aggiuntive */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email <span className="text-gray-400 font-normal">(opzionale)</span>
-            </label>
-            <input
-              type="email"
-              value={contatti.email}
-              onChange={(e) => setContatti((p) => ({ ...p, email: e.target.value }))}
-              placeholder="mario.rossi@email.com"
-              className="w-full rounded-xl border-2 border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-brand-500 transition"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Note aggiuntive <span className="text-gray-400 font-normal">(opzionale)</span>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Note aggiuntive{' '}
+              <span className="text-gray-400 font-normal">(opzionale)</span>
             </label>
             <textarea
-              value={contatti.note}
-              onChange={(e) => setContatti((p) => ({ ...p, note: e.target.value }))}
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
               rows={3}
-              placeholder="Qualsiasi altra informazione utile..."
+              placeholder="Es. piano, ascensore, urgenza, orari preferiti..."
               className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-brand-500 resize-none transition"
             />
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+
+          {!hasAnyQuestions && (
+            <p className="text-gray-500 text-sm text-center py-2">
+              Nessuna domanda specifica per i servizi selezionati. Aggiungi note se vuoi e invia il messaggio.
+            </p>
+          )}
         </div>
       )}
 
@@ -362,47 +245,29 @@ export default function PreventivoWizard({ preselected = [] }) {
           Indietro
         </button>
 
-        {step < 2 ? (
+        {step === 0 ? (
           <button
             type="button"
-            onClick={() => setStep((s) => s + 1)}
-            disabled={!canProceed()}
+            onClick={() => setStep(1)}
+            disabled={selected.length === 0}
             className="flex items-center gap-2 bg-brand-700 hover:bg-brand-900 disabled:opacity-40 disabled:cursor-not-allowed text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition"
           >
             Avanti
             <ChevronRight className="w-4 h-4" />
           </button>
         ) : (
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={loading || !canProceed()}
-            className="flex items-center gap-2 bg-brand-700 hover:bg-brand-900 disabled:opacity-40 disabled:cursor-not-allowed text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition"
+          <a
+            href={buildWhatsAppUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-[#25D366] hover:opacity-90 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition shadow-md"
           >
-            {loading ? (
-              <>
-                <SpinnerIcon className="w-4 h-4 animate-spin" />
-                Invio...
-              </>
-            ) : (
-              <>
-                <Send className="w-4 h-4" />
-                Invia richiesta
-              </>
-            )}
-          </button>
+            <WhatsAppSvg />
+            Invia su WhatsApp
+          </a>
         )}
       </div>
     </div>
-  )
-}
-
-function SpinnerIcon({ className }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-    </svg>
   )
 }
 
