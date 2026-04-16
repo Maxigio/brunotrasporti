@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import HomeServizi from '@/components/HomeServizi'
+import GalleryLightbox from '@/components/GalleryLightbox'
 
 // Selezione curata per la gallery — 12 foto + 2 video che rappresentano i lavori
 const galleryItems = [
@@ -48,31 +49,31 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-900 via-brand-700 to-[#1a5c3a] text-white py-24 px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-brand-900 via-brand-700 to-[#1a5c3a] text-white py-16 sm:py-24 px-4 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500 opacity-10 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-500 opacity-10 rounded-full translate-y-1/2 -translate-x-1/3 pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-brand-500 bg-opacity-20 border border-brand-500 border-opacity-40 text-brand-100 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-            <span className="w-2 h-2 bg-brand-500 rounded-full inline-block"></span>
+        <div className="max-w-4xl 2xl:max-w-5xl mx-auto text-center relative z-10">
+          <div className="inline-flex items-center gap-2 bg-brand-500 bg-opacity-20 border border-brand-500 border-opacity-40 text-brand-100 text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 rounded-full mb-5 sm:mb-6">
+            <span className="w-2 h-2 bg-brand-500 rounded-full inline-block shrink-0"></span>
             Torino e provincia
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-balance mb-4">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl 2xl:text-7xl font-extrabold leading-tight text-balance mb-4">
             Bruno Trasporti
           </h1>
-          <p className="text-xl sm:text-2xl text-gray-200 font-light mb-8 text-balance">
-            Pulizia, cura e affidabilità a Torino e provincia — dal verde ai locali, fino alle scale di casa tua.
+          <p className="text-base sm:text-xl md:text-2xl text-gray-200 font-light mb-7 sm:mb-8 text-balance max-w-2xl mx-auto">
+            Sgomberi, traslochi, pulizie e molto altro a Torino e provincia.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
             <Link
               href="#preventivo"
-              className="bg-white text-brand-900 hover:bg-gray-100 px-8 py-3.5 rounded-xl font-semibold text-lg transition"
+              className="bg-white text-brand-900 hover:bg-gray-100 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-semibold text-base sm:text-lg transition"
             >
               Richiedi un preventivo
             </Link>
             <Link
               href="/servizi"
-              className="bg-white bg-opacity-10 hover:bg-opacity-20 border border-white border-opacity-30 text-white px-8 py-3.5 rounded-xl font-semibold text-lg transition"
+              className="bg-white bg-opacity-10 hover:bg-opacity-20 border border-white border-opacity-30 text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-semibold text-base sm:text-lg transition"
             >
               Scopri i servizi
             </Link>
@@ -80,7 +81,7 @@ export default function HomePage() {
               href={`https://wa.me/38991894120?text=${encodeURIComponent('Salve Bruno, ho bisogno di un pronto intervento urgente. Sono disponibile a essere ricontattato al più presto.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5c] text-white px-8 py-3.5 rounded-xl font-semibold text-lg transition"
+              className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5c] text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-semibold text-base sm:text-lg transition"
             >
               <WhatsAppSvg />
               Pronto intervento
@@ -90,47 +91,17 @@ export default function HomePage() {
       </section>
 
       {/* Guarda il nostro lavoro */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+      <section className="py-16 sm:py-20 px-4 bg-white">
+        <div className="max-w-6xl 2xl:max-w-7xl mx-auto">
+          <div className="text-center mb-10 sm:mb-12">
             <span className="text-brand-500 font-semibold text-sm uppercase tracking-wide">Il nostro lavoro</span>
-            <h2 className="text-3xl font-bold text-brand-900 mt-2 mb-2">Guarda cosa facciamo</h2>
-            <p className="text-gray-500 max-w-xl mx-auto">
-              Foto e video dei nostri interventi a Torino e provincia.
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-900 mt-2 mb-2">Guarda cosa facciamo</h2>
+            <p className="text-gray-500 max-w-xl mx-auto text-sm sm:text-base">
+              Foto e video dei nostri interventi a Torino e provincia. Clicca per ingrandire.
             </p>
           </div>
 
-          {/* Masonry gallery — foto e video reali */}
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-3 mb-12">
-            {galleryItems.map((item, i) => (
-              <div
-                key={i}
-                className="break-inside-avoid mb-3 rounded-2xl overflow-hidden group cursor-pointer relative bg-gray-100"
-              >
-                {item.type === 'photo' ? (
-                  <>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={item.src}
-                      alt="Lavoro Bruno Trasporti Torino"
-                      className="w-full h-auto block"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                  </>
-                ) : (
-                  <video
-                    src={item.src}
-                    className="w-full h-auto block"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                )}
-              </div>
-            ))}
-          </div>
+          <GalleryLightbox items={galleryItems} />
 
           {/* Social media */}
           <div className="border-t border-gray-100 pt-10">
@@ -144,7 +115,7 @@ export default function HomePage() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center gap-3 ${s.color} text-white px-6 py-3 rounded-xl font-semibold text-sm hover:opacity-90 transition min-w-[160px] justify-center`}
+                  className={`flex items-center gap-3 ${s.color} text-white px-6 py-3 rounded-xl font-semibold text-sm hover:opacity-90 transition w-full sm:w-auto justify-center`}
                 >
                   {s.icon}
                   <span>{s.cta} su {s.name}</span>

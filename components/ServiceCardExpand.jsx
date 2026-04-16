@@ -17,16 +17,20 @@ const servicePhotos = {
 
 // Gradient fallback per servizi senza foto
 const gradients = {
-  'pulizia-verde':    'from-emerald-500 to-green-700',
-  'pulizia-locali':   'from-blue-500 to-indigo-700',
-  'pulizia-scale':    'from-slate-400 to-gray-600',
-  'noleggio-scala':   'from-amber-400 to-orange-600',
-  'traslochi':        'from-orange-500 to-red-600',
-  'smaltimenti':      'from-rose-400 to-pink-600',
-  'sgombero-cantine': 'from-purple-400 to-violet-700',
-  'decoratore':       'from-pink-400 to-rose-600',
-  'idraulico':        'from-cyan-400 to-blue-600',
-  'elettricista':     'from-yellow-400 to-amber-500',
+  'pulizia-verde':           'from-emerald-500 to-green-700',
+  'pulizia-locali':          'from-blue-500 to-indigo-700',
+  'pulizia-scale':           'from-slate-400 to-gray-600',
+  'noleggio-scala':          'from-amber-400 to-orange-600',
+  'trasporti':               'from-orange-500 to-red-600',
+  'traslochi':               'from-orange-500 to-red-600',
+  'smaltimenti':             'from-rose-400 to-pink-600',
+  'sgomberi':                'from-purple-400 to-violet-700',
+  'sgombero-cantine':        'from-purple-400 to-violet-700',
+  'decoratore':              'from-pink-400 to-rose-600',
+  'idraulico':               'from-cyan-400 to-blue-600',
+  'elettricista':            'from-yellow-400 to-amber-500',
+  'acquisto-oggetti-antichi':'from-amber-600 to-yellow-700',
+  'muratura-completa':       'from-stone-500 to-gray-700',
 }
 
 export default function ServiceCardExpand({ servizio, isOpen, onToggle, onRichiediPreventivo }) {
@@ -218,6 +222,17 @@ export function ServiceIcon({ name, className }) {
     lightning: (
       <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    gem: (
+      <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3l9 6-9 12L3 9l9-6z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9h18" />
+      </svg>
+    ),
+    bricks: (
+      <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6h18M3 12h18M3 18h18M9 6v6M15 12v6" />
       </svg>
     ),
   }

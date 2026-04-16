@@ -155,6 +155,29 @@ export const serviziDettagli = {
       },
     ],
   },
+  'trasporti': {
+    incluso: [
+      'Trasporto merci e materiali',
+      'Oggetti ingombranti e mobili',
+      'Carico e scarico inclusi',
+      'Mezzo attrezzato',
+      'Copertura Torino e provincia',
+    ],
+    domande: [
+      {
+        id: 'tipo_carico',
+        label: 'Cosa devi trasportare?',
+        tipo: 'scelta',
+        opzioni: ['Mobili / Arredi', 'Materiali edili', 'Merci varie', 'Altro'],
+      },
+      {
+        id: 'distanza',
+        label: 'Distanza di trasporto',
+        tipo: 'scelta',
+        opzioni: ['Stesso comune', 'Provincia di Torino', 'Fuori provincia'],
+      },
+    ],
+  },
   'sgomberi': {
     incluso: [
       'Svuotamento completo dello spazio',
@@ -175,28 +198,6 @@ export const serviziDettagli = {
         label: 'Dimensione approssimativa',
         tipo: 'scelta',
         opzioni: ['Piccola (< 30 mq)', 'Media (30–80 mq)', 'Grande (> 80 mq)'],
-      },
-    ],
-  },
-  'sgombero-cantine': {
-    incluso: [
-      'Svuotamento completo',
-      'Selezione materiale recuperabile',
-      'Smaltimento rifiuti',
-      'Pulizia finale dello spazio',
-    ],
-    domande: [
-      {
-        id: 'dimensione',
-        label: 'Dimensione cantina',
-        tipo: 'scelta',
-        opzioni: ['Piccola (< 10 mq)', 'Media (10–30 mq)', 'Grande (> 30 mq)'],
-      },
-      {
-        id: 'contenuto',
-        label: 'Contenuto principale',
-        tipo: 'scelta',
-        opzioni: ['Mobili / Legno', 'Elettrodomestici', 'Scatoloni / Vario', 'Materiali edili'],
       },
     ],
   },
@@ -223,6 +224,29 @@ export const serviziDettagli = {
       },
     ],
   },
+  'idraulico': {
+    incluso: [
+      'Riparazione perdite e guasti',
+      'Installazione sanitari',
+      'Impianti idrosanitari',
+      'Pronto intervento',
+      'Messa a norma impianti',
+    ],
+    domande: [
+      {
+        id: 'tipo_intervento',
+        label: 'Tipo di intervento',
+        tipo: 'scelta',
+        opzioni: ['Guasto / Perdita', 'Installazione sanitari', 'Nuovo impianto', 'Manutenzione'],
+      },
+      {
+        id: 'urgenza',
+        label: 'Urgenza',
+        tipo: 'scelta',
+        opzioni: ['Urgente (oggi)', 'Entro 2–3 giorni', 'Programmabile'],
+      },
+    ],
+  },
   'elettricista': {
     incluso: [
       'Impianti civili e industriali',
@@ -243,6 +267,52 @@ export const serviziDettagli = {
         label: 'Contesto',
         tipo: 'scelta',
         opzioni: ['Appartamento', 'Ufficio / Negozio', 'Condominio', 'Capannone / Industria'],
+      },
+    ],
+  },
+  'acquisto-oggetti-antichi': {
+    incluso: [
+      'Valutazione gratuita a domicilio',
+      'Acquisto mobili antichi e d\'epoca',
+      'Acquisto oggetti da collezione',
+      'Acquisto arredi e complementi vintage',
+      'Ritiro diretto a casa tua',
+    ],
+    domande: [
+      {
+        id: 'tipo_oggetto',
+        label: 'Tipo di oggetto',
+        tipo: 'scelta_multipla',
+        opzioni: ['Mobili antichi', 'Quadri / Opere d\'arte', 'Oggetti da collezione', 'Argenteria / Porcellane', 'Altro'],
+      },
+      {
+        id: 'quantita',
+        label: 'Quantità approssimativa',
+        tipo: 'scelta',
+        opzioni: ['1–2 pezzi', '3–10 pezzi', 'Più di 10 pezzi', 'Intera abitazione'],
+      },
+    ],
+  },
+  'muratura-completa': {
+    incluso: [
+      'Demolizioni e rimozioni',
+      'Costruzione e ricostruzione pareti',
+      'Rifacimento intonaci',
+      'Posa pavimenti e rivestimenti',
+      'Sopralluogo e preventivo gratuiti',
+    ],
+    domande: [
+      {
+        id: 'tipo_lavoro',
+        label: 'Tipo di lavoro',
+        tipo: 'scelta',
+        opzioni: ['Demolizione', 'Costruzione pareti', 'Intonacatura', 'Posa pavimenti / rivestimenti'],
+      },
+      {
+        id: 'contesto',
+        label: 'Contesto',
+        tipo: 'scelta',
+        opzioni: ['Appartamento', 'Ufficio / Negozio', 'Esterno / Facciata', 'Altro'],
       },
     ],
   },

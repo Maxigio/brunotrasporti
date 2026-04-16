@@ -1,4 +1,28 @@
+// Servizi eseguiti direttamente da Bruno
 export const serviziPrincipali = [
+  {
+    id: 'sgomberi',
+    nome: 'Sgomberi',
+    descrizione:
+      'Sgombero di appartamenti, uffici, cantine, soffitte e locali di qualsiasi dimensione. Selezione materiale e smaltimento inclusi.',
+    icona: 'box',
+  },
+  {
+    id: 'trasporti',
+    nome: 'Trasporti',
+    descrizione: 'Trasporto di merci, materiali e oggetti ingombranti a Torino e provincia. Servizio rapido e affidabile.',
+    icona: 'truck',
+  },
+  {
+    id: 'noleggio-scala',
+    nome: 'Noleggio Scala',
+    descrizione: 'Noleggio di scale professionali per lavori in quota, in sicurezza.',
+    icona: 'ladder',
+  },
+]
+
+// Servizi erogati tramite professionisti in collaborazione con Bruno
+export const serviziCollaborazione = [
   {
     id: 'pulizia-verde',
     nome: 'Pulizia del Verde',
@@ -20,15 +44,6 @@ export const serviziPrincipali = [
       'Pulizia periodica di scale condominiali, androni, ascensori e aree comuni. Contratti mensili o settimanali.',
     icona: 'stairs',
   },
-]
-
-export const serviziCollaborazione = [
-  {
-    id: 'noleggio-scala',
-    nome: 'Noleggio Scala',
-    descrizione: 'Noleggio di scale professionali per lavori in quota, in sicurezza.',
-    icona: 'ladder',
-  },
   {
     id: 'traslochi',
     nome: 'Traslochi',
@@ -36,35 +51,34 @@ export const serviziCollaborazione = [
     icona: 'truck',
   },
   {
-    id: 'smaltimenti',
-    nome: 'Smaltimenti',
-    descrizione: 'Smaltimento rifiuti ingombranti, speciali e materiali di risulta nel rispetto delle normative.',
-    icona: 'trash',
-  },
-  {
-    id: 'sgomberi',
-    nome: 'Sgomberi',
-    descrizione: 'Sgombero di appartamenti, uffici, cantine, soffitte e locali di qualsiasi dimensione.',
-    icona: 'box',
-  },
-  {
-    id: 'sgombero-cantine',
-    nome: 'Sgombero Cantine',
-    descrizione: 'Sgombero completo di cantine, soffitte, box e locali di deposito.',
-    icona: 'box',
-  },
-  {
     id: 'decoratore',
     nome: 'Decoratore',
     descrizione: 'Tinteggiatura, verniciatura e decorazione di interni ed esterni.',
     icona: 'paint',
   },
-
+  {
+    id: 'idraulico',
+    nome: 'Idraulico',
+    descrizione: 'Interventi idraulici, riparazioni guasti, installazione sanitari e impianti.',
+    icona: 'water',
+  },
   {
     id: 'elettricista',
     nome: 'Elettricista',
     descrizione: 'Impianti elettrici civili e industriali, messa a norma e riparazioni.',
     icona: 'lightning',
+  },
+  {
+    id: 'acquisto-oggetti-antichi',
+    nome: 'Acquisto Oggetti Antichi',
+    descrizione: 'Valutazione e acquisto di mobili antichi, oggetti da collezione e arredi vintage.',
+    icona: 'gem',
+  },
+  {
+    id: 'muratura-completa',
+    nome: 'Muratura Completa',
+    descrizione: 'Lavori di muratura, demolizioni, ricostruzioni e rifacimento pareti. Interventi civili e commerciali.',
+    icona: 'bricks',
   },
 ]
 

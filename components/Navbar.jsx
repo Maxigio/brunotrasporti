@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Leaf } from 'lucide-react'
+import { Truck } from 'lucide-react'
 
 const links = [
   { href: '/', label: 'Home' },
@@ -21,7 +21,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <Leaf className="w-6 h-6 text-brand-500" strokeWidth={2} />
+            <Truck className="w-6 h-6 text-brand-500" strokeWidth={2} />
             <span className="text-white font-bold text-lg leading-tight">
               Bruno Trasporti
             </span>

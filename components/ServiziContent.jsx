@@ -124,11 +124,11 @@ export default function ServiziContent() {
         <div className="absolute top-0 right-0 w-80 h-80 bg-brand-500 opacity-10 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-56 h-56 bg-brand-500 opacity-10 rounded-full translate-y-1/2 -translate-x-1/3 pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-brand-500 bg-opacity-20 border border-brand-500 border-opacity-40 text-brand-100 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-            <span className="w-2 h-2 bg-brand-500 rounded-full inline-block" />
-            10 servizi disponibili · Torino e provincia
+          <div className="inline-flex items-center gap-2 bg-brand-500 bg-opacity-20 border border-brand-500 border-opacity-40 text-brand-100 text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 rounded-full mb-6">
+            <span className="w-2 h-2 bg-brand-500 rounded-full inline-block shrink-0" />
+            12 servizi disponibili · Torino e provincia
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-balance mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-extrabold leading-tight text-balance mb-4">
             I Nostri <span className="text-white opacity-80">Servizi</span>
           </h1>
           <p className="text-xl text-gray-200 font-light mb-8 max-w-2xl mx-auto text-balance">
@@ -156,18 +156,18 @@ export default function ServiziContent() {
       </section>
 
       {/* ── Servizi Principali ───────────────────────────────── */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-5xl mx-auto">
+      <section className="py-16 sm:py-20 px-4 bg-white">
+        <div className="max-w-5xl 2xl:max-w-7xl mx-auto">
           <div className="mb-10">
             <span className="text-brand-500 font-semibold text-sm uppercase tracking-wide">
-              Core
+              Direttamente da Bruno
             </span>
-            <h2 className="text-2xl font-bold text-brand-900 mt-1">Servizi Principali</h2>
+            <h2 className="text-2xl font-bold text-brand-900 mt-1">Servizi Diretti</h2>
             <p className="text-gray-500 text-sm mt-1 max-w-lg">
-              I servizi gestiti direttamente dal team di Bruno, con intervento rapido e qualità garantita.
+              Sgomberi, smaltimenti, traslochi e noleggio scala: lavori gestiti personalmente da Bruno.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 items-start">
             {serviziPrincipali.map((s) => (
               <ServiceCardExpand
                 key={s.id}
@@ -182,8 +182,8 @@ export default function ServiziContent() {
       </section>
 
       {/* ── Servizi in Collaborazione ────────────────────────── */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
+      <section className="py-16 sm:py-20 px-4 bg-gray-50">
+        <div className="max-w-5xl 2xl:max-w-7xl mx-auto">
           <div className="mb-2">
             <span className="text-gray-500 font-semibold text-sm uppercase tracking-wide">
               In partnership
@@ -347,7 +347,7 @@ export default function ServiziContent() {
                     className="w-full rounded-xl border-2 border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-brand-500 transition bg-white text-gray-700"
                   >
                     <option value="">Seleziona un servizio…</option>
-                    <optgroup label="Servizi principali">
+                    <optgroup label="Servizi diretti">
                       {serviziPrincipali.map((s) => (
                         <option key={s.id} value={s.id}>{s.nome}</option>
                       ))}

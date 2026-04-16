@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Leaf } from 'lucide-react'
+import { Truck } from 'lucide-react'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <Leaf className="w-5 h-5 text-brand-500" strokeWidth={2} />
+              <Truck className="w-5 h-5 text-brand-500" strokeWidth={2} />
               <span className="text-white font-bold text-lg">
                 Bruno Trasporti <span className="text-white opacity-80">Torino</span>
               </span>
