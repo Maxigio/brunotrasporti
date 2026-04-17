@@ -6,6 +6,10 @@ import { WHATSAPP_NUMBER } from '@/lib/constants'
 export const metadata = {
   title: 'Sgomberi, Traslochi e Pulizie a Torino | Bruno Trasporti',
   description: 'Sgomberi appartamenti e cantine, traslochi, pulizie locali e scale, noleggio scala a Torino e provincia. Preventivo gratuito — rispondiamo in giornata.',
+  keywords: [
+    'sgomberi Torino', 'sgombero appartamento', 'traslochi Torino', 'pulizie Torino',
+    'noleggio scala Torino', 'preventivo gratuito', 'sgombero cantina', 'pulizia scale',
+  ],
 }
 
 // Selezione curata per la gallery — 12 foto + 2 video che rappresentano i lavori

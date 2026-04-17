@@ -3,6 +3,10 @@ import { WHATSAPP_NUMBER, PHONE_TEL, PHONE_DISPLAY } from '@/lib/constants'
 export const metadata = {
   title: 'Contatti — Chiamaci o Scrivi su WhatsApp',
   description: 'Contatta Bruno Trasporti Torino: +39 389 989 4129. Disponibili lunedì-sabato. Preventivo gratuito per sgomberi, pulizie e traslochi a Torino.',
+  keywords: [
+    'contatti Bruno Trasporti Torino', 'preventivo sgomberi Torino', 'telefono traslochi Torino',
+    'WhatsApp pulizie Torino', '+39 389 989 4129',
+  ],
 }
 
 export default function ContattiPage() {
