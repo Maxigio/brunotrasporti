@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Truck } from 'lucide-react'
+import { WHATSAPP_NUMBER, PHONE_TEL, PHONE_DISPLAY } from '@/lib/constants'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -36,14 +37,14 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-3">Contatti</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="tel:+38991894120" className="hover:text-brand-500 transition-colors flex items-center gap-2">
+                <a href={`tel:${PHONE_TEL}`} className="hover:text-brand-500 transition-colors flex items-center gap-2">
                   <PhoneIcon className="w-4 h-4 text-brand-500 shrink-0" />
-                  +389 918 94 120
+                  {PHONE_DISPLAY}
                 </a>
               </li>
               <li>
                 <a
-                  href="https://wa.me/38991894120"
+                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-brand-500 transition-colors flex items-center gap-2"

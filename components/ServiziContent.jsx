@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { serviziPrincipali, serviziCollaborazione, tuttiServizi } from '@/data/servizi'
 import ServiceCardExpand from '@/components/ServiceCardExpand'
 import PreventivoWizard from '@/components/PreventivoWizard'
+import { WHATSAPP_NUMBER } from '@/lib/constants'
 
 /* ─── timeline ────────────────────────────────────────────────── */
 const timeline = [
@@ -84,7 +85,7 @@ export default function ServiziContent() {
               Richiedi preventivo
             </a>
             <a
-              href={`https://wa.me/38991894120?text=${encodeURIComponent('Salve Bruno, vorrei informazioni sui vostri servizi.')}`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Salve Bruno, vorrei informazioni sui vostri servizi.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5c] text-white px-7 py-3 rounded-xl font-semibold transition"

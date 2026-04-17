@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { X, Check, ArrowRight } from 'lucide-react'
 import { serviziDettagli } from '@/data/servizi_dettagli'
 import { tuttiServizi } from '@/data/servizi'
+import { WHATSAPP_NUMBER } from '@/lib/constants'
 
 export default function ServiceModal({ serviceId, onClose, onRichiediPreventivo }) {
   const servizio = tuttiServizi.find((s) => s.id === serviceId)
@@ -88,7 +89,7 @@ export default function ServiceModal({ serviceId, onClose, onRichiediPreventivo 
               Contattaci su WhatsApp per una risposta immediata.
             </p>
             <a
-              href={`https://wa.me/38991894120?text=${encodeURIComponent(`Salve Bruno, vorrei informazioni sul servizio: ${servizio.nome}.`)}`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Salve Bruno, vorrei informazioni sul servizio: ${servizio.nome}.`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition"

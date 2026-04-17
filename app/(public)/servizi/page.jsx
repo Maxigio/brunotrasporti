@@ -1,9 +1,8 @@
 import ServiziContent from '@/components/ServiziContent'
 
 export const metadata = {
-  title: 'Servizi — Bruno Trasporti Torino',
-  description:
-    'Tutti i servizi di Bruno Trasporti Torino: pulizia verde, locali, scale, traslochi, sgomberi, smaltimenti, elettricista a Torino e provincia.',
+  title: 'Servizi di Sgombero, Pulizia e Traslochi a Torino',
+  description: 'Tutti i servizi: sgomberi, traslochi, pulizia verde, locali e scale, noleggio scala, elettricista, idraulico a Torino e provincia. Preventivo gratuito.',
 }
 
 export default function ServiziPage() {

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Truck } from 'lucide-react'
+import { WHATSAPP_NUMBER } from '@/lib/constants'
 
 const links = [
   { href: '/', label: 'Home' },
@@ -43,7 +44,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href="https://wa.me/38991894120"
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
               className="ml-3 flex items-center gap-2 bg-brand-500 hover:bg-brand-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
@@ -83,7 +84,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href="https://wa.me/38991894120"
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 flex items-center gap-2 bg-brand-500 text-white px-4 py-3 rounded-lg text-sm font-semibold"

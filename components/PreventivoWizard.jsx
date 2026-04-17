@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react'
 import { ChevronRight, ChevronLeft, Check } from 'lucide-react'
 import { tuttiServizi } from '@/data/servizi'
 import { serviziDettagli } from '@/data/servizi_dettagli'
-
-const WHATSAPP_NUMBER = '38991894120'
+import { WHATSAPP_NUMBER } from '@/lib/constants'
 const STEP_LABELS = ['Servizi', 'Dettagli']
 
 export default function PreventivoWizard({ preselected = [] }) {

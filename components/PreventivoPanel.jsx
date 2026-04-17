@@ -2,8 +2,7 @@
 
 import { useState } from 'react'
 import { tuttiServizi } from '@/data/servizi'
-
-const WHATSAPP_NUMBER = '38991894120'
+import { WHATSAPP_NUMBER } from '@/lib/constants'
 
 export default function PreventivoPanel() {
   const [selected, setSelected] = useState([])   // ← array, multi-select

@@ -1,11 +1,9 @@
-export const metadata = {
-  title: 'Contatti — Bruno Trasporti Torino',
-  description:
-    'Contatta Bruno Trasporti Torino. Telefono, WhatsApp, orari. Serviamo Torino e provincia.',
-}
+import { WHATSAPP_NUMBER, PHONE_TEL, PHONE_DISPLAY } from '@/lib/constants'
 
-const WHATSAPP_NUMBER = '38991894120'
-const PHONE_NUMBER = '+38991894120'
+export const metadata = {
+  title: 'Contatti — Chiamaci o Scrivi su WhatsApp',
+  description: 'Contatta Bruno Trasporti Torino: +39 389 989 4129. Disponibili lunedì-sabato. Preventivo gratuito per sgomberi, pulizie e traslochi a Torino.',
+}
 
 export default function ContattiPage() {
   return (
@@ -24,7 +22,7 @@ export default function ContattiPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
             {/* Telefono */}
             <a
-              href={`tel:${PHONE_NUMBER}`}
+              href={`tel:${PHONE_TEL}`}
               className="flex flex-col items-center gap-4 bg-white border-2 border-brand-100 hover:border-brand-500 rounded-2xl p-8 text-center transition-all group"
             >
               <div className="w-14 h-14 bg-brand-100 group-hover:bg-brand-500 rounded-2xl flex items-center justify-center transition-colors">
@@ -32,7 +30,7 @@ export default function ContattiPage() {
               </div>
               <div>
                 <p className="text-sm text-gray-500 mb-1">Chiama ora</p>
-                <p className="text-xl font-bold text-brand-900">{PHONE_NUMBER}</p>
+                <p className="text-xl font-bold text-brand-900">{PHONE_DISPLAY}</p>
               </div>
             </a>
 

@@ -1,6 +1,12 @@
 import Link from 'next/link'
 import HomeServizi from '@/components/HomeServizi'
 import GalleryLightbox from '@/components/GalleryLightbox'
+import { WHATSAPP_NUMBER } from '@/lib/constants'
+
+export const metadata = {
+  title: 'Sgomberi, Traslochi e Pulizie a Torino | Bruno Trasporti',
+  description: 'Sgomberi appartamenti e cantine, traslochi, pulizie locali e scale, noleggio scala a Torino e provincia. Preventivo gratuito — rispondiamo in giornata.',
+}
 
 // Selezione curata per la gallery — 12 foto + 2 video che rappresentano i lavori
 const galleryItems = [
@@ -71,7 +77,7 @@ export default function HomePage() {
               Scopri i servizi
             </Link>
             <a
-              href={`https://wa.me/38991894120?text=${encodeURIComponent('Salve Bruno, ho bisogno di un pronto intervento urgente. Sono disponibile a essere ricontattato al più presto.')}`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Salve Bruno, ho bisogno di un pronto intervento urgente. Sono disponibile a essere ricontattato al più presto.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5c] text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-semibold text-base sm:text-lg transition"
