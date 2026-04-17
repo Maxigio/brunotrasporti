@@ -5,7 +5,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: 'Bruno Trasporti Torino',
-  telephone: '+393899894129',
+  telephone: '+393899894120',
   url: 'https://brunotrasportitorino.it',
   areaServed: ['Torino', 'Moncalieri', 'Collegno', 'Rivoli', 'Nichelino', 'Settimo Torinese', 'Chieri'],
   hasOfferCatalog: {
